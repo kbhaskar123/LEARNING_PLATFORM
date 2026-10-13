@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LearnHub - Login</title>
+
+<style>
+/* ---------------------------------------------------
+   RESET + GLOBAL
+--------------------------------------------------- */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #e9f6ff, #f6fbff);
+}
+
+/* ---------------------------------------------------
+   NAVBAR
+--------------------------------------------------- */
+.navbar {
+  width: 100%;
+  padding: 14px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffffd8;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e3e3e3;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2f80ed;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: 0.25s;
+}
+
+.nav-links a:hover {
+  background: rgba(47, 128, 237, 0.10);
+  color: #2f80ed;
+}
+
+/* Register pill */
+.register-btn {
+  background: #9fe6f5;
+  color: #2f80ed !important;
+  padding: 8px 16px !important;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------
+   FORM + CARD
+--------------------------------------------------- */
+.page-wrap {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.login-card {
+  width: 420px;
+  max-width: calc(100% - 40px);
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 20px;
+  padding: 34px;
+  box-shadow: 0 14px 40px rgba(20,40,80,0.10);
+  text-align: center;
+  animation: fadePop .35s ease-out;
+}
+
+@keyframes fadePop {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-card h2 {
+  margin: 0 0 22px;
+  color: #2f80ed;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+/* Inputs */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 16px;
+  border: 1px solid #d7e4ef;
+  outline: none;
+  background: white;
+  transition: 0.25s;
+}
+
+input:focus {
+  border-color: #2f80ed;
+  box-shadow: 0 0 10px rgba(47,128,237,0.15);
+}
+
+/* Button */
+.button {
+  border: none;
+  padding: 14px;
+  border-radius: 10px;
+  color: white;
+  background: linear-gradient(180deg, #2f80ed, #1b63d6);
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.button:hover {
+  box-shadow: 0 10px 22px rgba(47,128,237,0.18);
+}
+
+/* Error Message */
+#errorMsg {
+  color: #d64545;
+  font-size: 14px;
+  min-height: 22px;
+}
+
+/* Responsive */
+@media (max-width: 460px) {
+  .logo { font-size: 26px; }
+  .login-card { padding: 24px; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo">LearnHub</div>
+  <nav class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="register.html" class="register-btn">Register</a>
+    <a href="login.html">Login</a>
+  </nav>
+</header>
+
+<div class="page-wrap">
+  <div class="login-card" role="region">
+    <h2>Login</h2>
+
+    <form id="loginForm" autocomplete="on" novalidate>
+      <input type="email" id="email" placeholder="Email" required />
+      <input type="password" id="password" placeholder="Password" required />
+      <button type="submit" class="button">Login</button>
+    </form>
+
+    <div id="errorMsg"></div>
+  </div>
+</div>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = document.getElementById('email').value.trim();
+  const pwd = document.getElementById('password').value.trim();
+  const err = document.getElementById('errorMsg');
+
+  err.style.color = '#d64545';
+  err.textContent = '';
+
+  if (!email || !pwd) {
+    err.textContent = 'Please enter email and password.';
+    return;
+  }
+
+  err.style.color = '#2f80ed';
+  err.textContent = 'Attempting to login...';
+
+  try {
+    const res = await fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pwd })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+  
+  // REQUIRED FIX → save full user object
+  localStorage.setItem("user", JSON.stringify({
+    name: data.user.name,
+    email: data.user.email,
+    role: data.user.role,
+    avatar: data.user.avatar || "https://i.ibb.co/vJvbJrV/default-avatar.png"
+  }));
+
+  // Keep these if you need them
+  localStorage.setItem("token", data.token);
+  localStorage.setItem("role", data.user.role);
+
+  if (data.user.role === "admin") {
+    window.location.href = "admin_dashboard.html";
+  } else {
+    window.location.href = "dashboard.html";
+  }
+}
+
+
+  } catch (error) {
+    err.style.color = '#d64545';
+    err.textContent = 'Network or server error.';
+  }
+});
+</script>
+
+</body>
+</html>

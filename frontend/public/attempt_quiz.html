@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Attempt Quiz</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: #eef5ff;
+  overflow-x: hidden;
+}
+
+/* TIMER */
+#timer {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  color: #d9534f;
+  margin-top: 25px;
+}
+
+/* MAIN QUIZ BOX */
+.quiz-container {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  transition: .3s ease;
+}
+
+.quiz-container:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+/* TITLE */
+#quiz-title {
+  text-align: center;
+  font-size: 28px;
+  color: #2f80ed;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+/* QUESTION TEXT */
+.question-text {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* OPTION BUTTONS */
+.option {
+  background: #f2f6ff;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.option:hover {
+  background: #e0ebff;
+}
+
+.option.selected {
+  border-color: #2f80ed;
+  background: #d9eaff;
+}
+
+/* NEXT BUTTON */
+#nextBtn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(45deg, #2f80ed, #4fa3f7);
+  border: none;
+  border-radius: 12px;
+  font-size: 18px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
+}
+
+#nextBtn:hover {
+  opacity: .85;
+  transform: scale(1.02);
+}
+
+/* PROGRESS BAR */
+.progress-wrapper {
+  margin-bottom: 20px;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #cddcfa;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 10px;
+  width: 0%;
+  background: #2f80ed;
+  transition: width .3s ease;
+}
+
+</style>
+
+<script src="../js/attempt.js" defer></script>
+
+</head>
+
+<body>
+
+<div id="timer">00:00</div>
+
+<div class="quiz-container">
+
+  <div id="quiz-title">Loading...</div>
+
+  <div class="progress-wrapper">
+    <div class="progress-bar">
+      <div id="progressFill" class="progress-fill"></div>
+    </div>
+  </div>
+
+  <div id="question-box"></div>
+
+  <button id="nextBtn">Next</button>
+
+</div>
+
+</body>
+</html>

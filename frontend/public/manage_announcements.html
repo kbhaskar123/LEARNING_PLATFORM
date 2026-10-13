@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manage Announcements - Admin</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <script src="../js/manage_announcements.js" defer></script>
+</head>
+<body>
+<header class="navbar">
+  <div class="logo">LearnHub</div>
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="logout.html" id="logoutBtn">Logout</a>
+  </nav>
+</header>
+<main class="container fade-in">
+  <h2>Add Announcement</h2>
+  <form id="announcementForm">
+    <input type="text" id="title" placeholder="Announcement Title" required />
+    <textarea id="description" placeholder="Announcement Description" required></textarea>
+    <button type="submit" class="button">Add Announcement</button>
+  </form>
+  <p id="announcementMsg"></p>
+  <hr>
+  <h3>All Announcements</h3>
+  <ul id="announcementsList"></ul>
+</main>
+</body>
+</html>

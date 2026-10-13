@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LearnHub - Home</title>
+
+<style>
+/* ---------------------------------- */
+/* GLOBAL LAYOUT FIX (NO SIDE SCROLL) */
+/* ---------------------------------- */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
+  background: #eef7ff;
+}
+
+/* ---------------------------------- */
+/* NAVBAR                             */
+/* ---------------------------------- */
+.navbar {
+  width: 100%;
+  padding: 14px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: #ffffffd8;
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2f80ed;
+}
+
+/* NAV LINKS */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 6px 10px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #2f80ed;
+}
+
+/* REGISTER button */
+.register-btn {
+  background: #8eddff;
+  padding: 8px 16px !important;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #2f80ed !important;
+}
+
+.register-btn:hover {
+  background: #70d2ff;
+}
+
+/* ---------------------------------- */
+/* MAIN CONTENT                       */
+/* ---------------------------------- */
+.container {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 60px;
+  max-width: 1100px;
+}
+
+h1 {
+  font-size: 40px;
+  color: #2f80ed;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 18px;
+  color: #444;
+}
+
+/* GET STARTED BUTTON */
+.button {
+  background: #2f80ed;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-size: 18px;
+  display: inline-block;
+  margin: 20px auto;
+}
+
+.button:hover {
+  background: #1c6ad6;
+}
+
+/* ---------------------------------- */
+/* FEATURE CARDS SECTION              */
+/* ---------------------------------- */
+.cards {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 300px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 20px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  color: #2f80ed;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  margin-top: 50px;
+  padding: 20px;
+  color: #666;
+}
+.user-dropdown {
+  position: relative;
+  cursor: pointer;
+  font-weight: 700;
+  color: #2f80ed;
+}
+
+.user-name {
+  padding: 8px 12px;
+  border-radius: 10px;
+  transition: 0.25s;
+}
+
+.user-name:hover {
+  background: rgba(47, 128, 237, 0.1);
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  padding: 10px 0;
+  width: 150px;
+  display: none;
+  z-index: 1000;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 16px;
+  color: #333;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(47, 128, 237, 0.08);
+  color: #2f80ed;
+}
+
+</style>
+</head>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("token");
+    const name = localStorage.getItem("name");
+    const role = localStorage.getItem("role");
+
+    const nav = document.querySelector(".nav-links");
+
+    if (token && name) {
+        // Replace Login & Register with user's name + Dashboard + Logout
+nav.innerHTML = `
+    <a href="dashboard.html">Dashboard</a>
+
+    <div class="user-dropdown">
+        <span id="userNameDisplay" class="user-name">${name}</span>
+        <div id="userMenu" class="dropdown-menu">
+            <a href="profile.html">Profile</a>
+            <a id="logoutBtn">Logout</a>
+        </div>
+    </div>
+`;
+;
+
+       document.getElementById("logoutBtn").onclick = () => {
+    localStorage.clear();
+
+    // Show message
+    const msg = document.createElement("div");
+    msg.innerText = "Logged out successfully!";
+    msg.style.position = "fixed";
+    msg.style.top = "20px";
+    msg.style.right = "20px";
+    msg.style.background = "#2f80ed";
+    msg.style.color = "white";
+    msg.style.padding = "12px 20px";
+    msg.style.borderRadius = "8px";
+    msg.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
+    msg.style.fontSize = "16px";
+    msg.style.zIndex = "2000";
+    document.body.appendChild(msg);
+
+    // Redirect after 1.5s
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 1500);
+};
+
+    }
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const name = localStorage.getItem("name");
+
+    // Set username text
+    document.getElementById("userNameDisplay").innerText = name || "User";
+
+    const menu = document.getElementById("userMenu");
+    const user = document.getElementById("userNameDisplay");
+
+    // Toggle dropdown on click
+    user.addEventListener("click", () => {
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener("click", (e) => {
+        if (!e.target.closest(".user-dropdown")) {
+            menu.style.display = "none";
+        }
+    });
+
+    // Logout
+   document.getElementById("logoutBtn").onclick = () => {
+    localStorage.clear();
+
+    // Show message
+    const msg = document.createElement("div");
+    msg.innerText = "Logged out successfully!";
+    msg.style.position = "fixed";
+    msg.style.top = "20px";
+    msg.style.right = "20px";
+    msg.style.background = "#2f80ed";
+    msg.style.color = "white";
+    msg.style.padding = "12px 20px";
+    msg.style.borderRadius = "8px";
+    msg.style.boxShadow = "0 4px 12px rgba(0,0,0,0.15)";
+    msg.style.fontSize = "16px";
+    msg.style.zIndex = "2000";
+    document.body.appendChild(msg);
+
+    // Redirect after 1.5s
+    setTimeout(() => {
+        window.location.href = "index.html";
+    }, 1500);
+};
+
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if (sessionStorage.getItem("logoutMessage")) {
+        alert("Logged out successfully!");
+        sessionStorage.removeItem("logoutMessage");
+    }
+});
+</script>
+
+
+<body>
+
+<!-- ---------------------------------- -->
+<!-- HEADER -->
+<!-- ---------------------------------- -->
+<header class="navbar">
+  <div class="logo">LearnHub</div>
+
+  <nav class="nav-links">
+    <a href="courses.html">Courses</a>
+    <a href="quizzes.html">Quizzes</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="login.html">Login</a>
+    <a href="register.html" class="register-btn">Register</a>
+  </nav>
+</header>
+
+
+<!-- ---------------------------------- -->
+<!-- MAIN CONTENT -->
+<!-- ---------------------------------- -->
+<main class="container fade-in">
+  <h1>Welcome to LearnHub</h1>
+  <p>Your online learning platform. Access courses, quizzes, and announcements anytime.</p>
+
+  <a href="register.html" class="button">Get Started</a>
+
+<div class="cards">
+
+  <div class="card" onclick="window.location.href='courses.html'" style="cursor:pointer;">
+    <h3>Courses</h3>
+    <p>Explore a variety of courses designed to enhance your skills and knowledge.</p>
+  </div>
+
+  <div class="card" onclick="window.location.href='quizzes.html'" style="cursor:pointer;">
+    <h3>Quizzes</h3>
+    <p>Test your knowledge with interactive quizzes and get instant feedback.</p>
+  </div>
+
+  <div class="card" onclick="window.location.href='announcements.html'" style="cursor:pointer;">
+    <h3>Announcements</h3>
+    <p>Stay updated with important notifications and announcements.</p>
+  </div>
+
+</div>
+
+
+<footer>© 2025 LearnHub. All rights reserved.</footer>
+<script src="../js/auth.js"></script>
+</body>
+</html>

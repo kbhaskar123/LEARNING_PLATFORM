@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Manage Quizzes - Admin</title>
+  <link rel="stylesheet" href="../css/main.css" />
+  <script src="../js/manage_quizzes.js" defer></script>
+</head>
+<body>
+<header class="navbar">
+  <div class="logo">LearnHub</div>
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="logout.html" id="logoutBtn">Logout</a>
+  </nav>
+</header>
+<main class="container fade-in">
+  <h2>Add Quiz</h2>
+  <form id="quizForm">
+    <input type="text" id="courseId" placeholder="Course ID" required />
+    <input type="text" id="question" placeholder="Quiz Question" required />
+    <input type="text" id="option1" placeholder="Option 1" required />
+    <input type="text" id="option2" placeholder="Option 2" required />
+    <input type="text" id="option3" placeholder="Option 3" required />
+    <input type="text" id="option4" placeholder="Option 4" required />
+    <select id="answer">
+      <option value="0">Option 1</option>
+      <option value="1">Option 2</option>
+      <option value="2">Option 3</option>
+      <option value="3">Option 4</option>
+    </select>
+    <button type="submit" class="button">Add Quiz</button>
+  </form>
+  <p id="quizMsg"></p>
+  <hr>
+  <h3>All Quizzes</h3>
+  <ul id="quizzesList"></ul>
+</main>
+</body>
+</html>

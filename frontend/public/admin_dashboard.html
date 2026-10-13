@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LearnHub - Admin Dashboard</title>
+
+<style>
+/* -----------------------------------------------
+   GLOBAL + RESET
+------------------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Arial", sans-serif;
+}
+
+body {
+  background: linear-gradient(180deg, #e9f6ff, #f6fbff);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* -----------------------------------------------
+   NAVBAR
+------------------------------------------------- */
+.navbar {
+  width: 100%;
+  padding: 14px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffffd8;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid #e3e3e3;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2f80ed;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-actions button {
+  background: #2f80ed;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.nav-actions button:hover {
+  background: #1b63d6;
+  box-shadow: 0 8px 20px rgba(47,128,237,0.25);
+}
+
+/* -----------------------------------------------
+   MAIN DASHBOARD CARD
+------------------------------------------------- */
+.dashboard-wrap {
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.dashboard-card {
+  width: 900px;
+  max-width: 95%;
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 18px 40px rgba(20,40,80,0.12);
+  animation: fadeIn 0.35s ease-out;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dashboard-card h2 {
+  font-size: 30px;
+  color: #2f80ed;
+  margin-bottom: 10px;
+}
+
+.dashboard-card p {
+  color: #444;
+  font-size: 17px;
+  margin-bottom: 25px;
+}
+
+/* -----------------------------------------------
+   ACTION BUTTON GRID
+------------------------------------------------- */
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 22px;
+  margin-top: 20px;
+}
+
+.action-btn {
+  background: linear-gradient(180deg, #2f80ed, #1b63d6);
+  color: white;
+  padding: 24px 20px;
+  text-align: center;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(47,128,237,0.20);
+  transition: 0.25s;
+}
+
+.action-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(47,128,237,0.28);
+}
+
+/* -----------------------------------------------
+   RESPONSIVE
+------------------------------------------------- */
+@media (max-width: 480px) {
+  .logo { font-size: 22px; }
+  .nav-actions button { padding: 8px 12px; font-size: 13px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo">LearnHub Admin</div>
+  <div class="nav-actions">
+    <button id="logoutBtn">Logout</button>
+  </div>
+</header>
+
+<!-- MAIN DASHBOARD -->
+<div class="dashboard-wrap">
+  <div class="dashboard-card">
+    <h2 id="adminWelcome">Welcome, Admin</h2>
+    <p>Use the tools below to manage the LearnHub platform.</p>
+
+    <div class="action-grid">
+      <div class="action-btn" id="manageCoursesBtn">📘 Manage Courses</div>
+      <div class="action-btn" id="manageQuizzesBtn">📝 Manage Quizzes</div>
+    </div>
+  </div>
+</div>
+
+<script src="../js/admin_dashboard.js"></script>
+</body>
+</html>

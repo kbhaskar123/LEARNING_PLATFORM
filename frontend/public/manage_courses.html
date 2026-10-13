@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Manage Courses - Admin</title>
+<link rel="stylesheet" href="../css/main.css" />
+<script src="../js/manage_courses.js" defer></script>
+</head>
+<body>
+<header class="navbar">
+  <div class="logo">LearnHub</div>
+  <nav>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="logout.html" id="logoutBtn">Logout</a>
+  </nav>
+</header>
+<main class="container fade-in">
+  <h2>Add New Course</h2>
+  <form id="courseForm">
+    <input type="text" id="title" placeholder="Course Title" required />
+    <textarea id="description" placeholder="Course Description" required></textarea>
+    <input type="url" id="videoUrl" placeholder="Video URL (optional)" />
+    <textarea id="paragraphs" placeholder="Course Paragraphs (separate by newlines)" rows="4"></textarea>
+    <button type="submit" class="button">Add Course</button>
+  </form>
+  <p id="courseMsg"></p>
+
+  <hr>
+  <h3>All Courses</h3>
+  <ul id="coursesList"></ul>
+</main>
+</body>
+</html>

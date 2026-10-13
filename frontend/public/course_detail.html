@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LearnHub - Course Detail</title>
+
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="../css/main.css" />
+
+  <style>
+    /* Page-specific styling */
+    .course-wrapper {
+      display: flex;
+      gap: 25px;
+      margin-top: 20px;
+    }
+
+    /* Lesson List */
+    .lesson-box {
+      width: 30%;
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      height: 500px;
+      overflow-y: auto;
+    }
+
+    .lesson-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0 0;
+    }
+
+    .lesson-box li {
+      padding: 12px;
+      border-bottom: 1px solid #ddd;
+      cursor: pointer;
+      transition: 0.2s;
+      border-radius: 6px;
+    }
+
+    .lesson-box li:hover {
+      background: #f0f7ff;
+    }
+
+    /* Highlight active lesson */
+    .lesson-active {
+      background: #d9ebff !important;
+      font-weight: bold;
+    }
+
+    /* Video Area */
+    #videoPlayer iframe,
+    #videoPlayer video {
+      width: 100%;
+      height: 420px;
+      border-radius: 10px;
+    }
+
+    /* Comment box */
+    #commentInput {
+      width: 100%;
+      height: 70px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 10px;
+      resize: none;
+    }
+
+    .button {
+      background: #2f80ed;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      margin-top: 5px;
+      display: inline-block;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+    }
+  </style>
+
+  <script src="../js/course_detail.js" defer></script>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="logo">LearnHub</div>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="login.html" id="logoutBtn">Logout</a>
+    </nav>
+  </header>
+
+  <main class="container fade-in">
+    <!-- Everything from JS will be injected here -->
+    <section id="courseDetail"></section>
+  </main>
+</body>
+</html>

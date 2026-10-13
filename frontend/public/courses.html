@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LearnHub - Courses</title>
+<link rel="stylesheet" href="../css/main.css" />
+
+<style>
+/* ----------------------------------------------------
+   PAGE LAYOUT FIXES + VISUAL IMPROVEMENT
+---------------------------------------------------- */
+
+/* Prevent horizontal scroll */
+body {
+  overflow-x: hidden;
+  background: linear-gradient(180deg, #eaf4ff, #f6fbff);
+}
+
+/* Navbar alignment fix */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 32px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.navbar nav a {
+  margin-left: 18px;
+  text-decoration: none;
+  font-weight: 600;
+  color: #333;
+  transition: 0.25s;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.navbar nav a:hover {
+  color: #2f80ed;
+  background: rgba(47, 128, 237, 0.08);
+}
+
+/* Page container center alignment */
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  padding: 30px;
+}
+
+/* Courses title */
+.container h2 {
+  text-align: center;
+  color: #2f80ed;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+/* Search bar */
+#searchInput {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ccd9ea;
+  font-size: 16px;
+  outline: none;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+  transition: 0.25s;
+}
+
+#searchInput:focus {
+  border-color: #2f80ed;
+  box-shadow: 0 6px 16px rgba(47,128,237,0.18);
+}
+
+/* Course list */
+#coursesList {
+  margin-top: 30px;
+  list-style: none;
+  padding-left: 0;
+}
+
+/* Individual course card */
+#coursesList li {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover effect */
+#coursesList li:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+}
+
+/* Course title */
+#coursesList li h3 {
+  margin: 0;
+  font-size: 22px;
+  color: #2f80ed;
+}
+
+/* Course description */
+#coursesList li p {
+  margin: 10px 0 15px;
+  font-size: 15px;
+}
+
+/* Buttons inside the course card */
+.button {
+  background: #2f80ed;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.button:hover {
+  background: #1e6bdd;
+}
+
+/* "View Course" link */
+.view-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #2f80ed;
+  font-weight: 600;
+  text-decoration: underline;
+}
+</style>
+
+<script src="../js/courses.js" defer></script>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <div class="logo">LearnHub</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="dashboard.html">Dashboard</a>
+    <a href="login.html">Login</a>
+    <a href="#" id="logoutBtn">Logout</a>
+  </nav>
+</header>
+
+<!-- PAGE CONTENT -->
+<main class="container fade-in">
+  <h2>Courses</h2>
+
+  <input type="text" id="searchInput" placeholder="Search courses..." />
+
+  <ul id="coursesList"></ul>
+</main>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LearnHub - Quizzes</title>
+
+<!-- GLOBAL STYLES -->
+<link rel="stylesheet" href="../css/main.css" />
+
+<style>
+/* PAGE BACKGROUND */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #eef5ff;
+}
+
+/* QUIZ PAGE CONTAINER */
+.container {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* TITLE */
+.container h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #2f80ed;
+  margin-bottom: 20px;
+}
+
+/* QUIZ LIST */
+#quizzesList {
+  list-style: none;
+  padding: 0;
+}
+
+/* QUIZ CARD */
+.quiz-card {
+  background: white;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: .2s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.quiz-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2f80ed;
+}
+
+/* ATTEMPT BUTTON */
+.attempt-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #2f80ed, #56ccf2);
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.attempt-btn:hover {
+  transform: scale(1.05);
+}
+
+/* NAVBAR FIX - use clean layout from main.css */
+.navbar {
+  padding: 12px 30px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+</style>
+
+<script src="../js/quizzes.js" defer></script>
+
+<script>
+function attemptQuiz(quizId) {
+  localStorage.setItem("currentQuizId", quizId);
+  window.location.href = "attempt_quiz.html";
+}
+</script>
+
+</head>
+
+<body>
+
+<!-- ✔ CLEAN NAVBAR (no duplicates, no conflicts) -->
+<header class="navbar">
+  <div class="logo">LearnHub</div>
+
+  <nav class="nav-links">
+    <a href="index.html" id="navHome">Home</a>
+    <a href="dashboard.html" id="navDashboard">Dashboard</a>
+
+    <div class="profile-menu" id="profileMenu" style="display:none;">
+      <img id="profileAvatar" class="avatar">
+      <span id="profileName">Account</span>
+      <div class="dropdown">
+        <a href="profile.html">Profile</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </div>
+    </div>
+
+    <a href="login.html" id="loginBtn">Login</a>
+  </nav>
+</header>
+
+<!-- QUIZ LIST -->
+<main class="container">
+  <h2>Quizzes</h2>
+  <ul id="quizzesList"></ul>
+</main>
+
+<!-- USER LOGIC -->
+<script>
+(function() {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const loginBtn = document.getElementById("loginBtn");
+  const navDashboard = document.getElementById("navDashboard");
+  const profileMenu = document.getElementById("profileMenu");
+  const profileName = document.getElementById("profileName");
+  const profileAvatar = document.getElementById("profileAvatar");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if (user) {
+    loginBtn.style.display = "none";
+    navDashboard.style.display = "inline-block";
+    profileMenu.style.display = "flex";
+
+    profileName.textContent = user.name || "User";
+    profileAvatar.src = user.avatar || "https://i.ibb.co/vJvbJrV/default-avatar.png";
+  } else {
+    loginBtn.style.display = "inline-block";
+    navDashboard.style.display = "none";
+    profileMenu.style.display = "none";
+  }
+
+  if (logoutBtn) {
+    logoutBtn.onclick = () => {
+      localStorage.clear();
+      alert("Logged out!");
+      window.location.href = "login.html";
+    };
+  }
+})();
+</script>
+
+</body>
+</html>

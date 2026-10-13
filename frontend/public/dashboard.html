@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LearnHub - Dashboard</title>
+<link rel="stylesheet" href="../css/main.css" />
+
+<style>
+/* Page Background (Soft Pastel) */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(120deg, #e0ecef 0%, #f7fafc 100%);
+}
+
+/* Custom dashboard tweaks */
+#welcomeBox {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 25px rgba(150, 180, 210, 0.18);
+  font-size: 18px;
+}
+
+#adminPanel {
+  background: #fff;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(150, 180, 210, 0.18);
+  margin-top: 20px;
+}
+
+#adminPanel .button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+/* Courses List */
+#myCoursesList li {
+  background: #fff;
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 18px rgba(150, 180, 210, 0.15);
+  transition: 0.25s ease;
+}
+
+#myCoursesList li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(150, 180, 210, 0.23);
+}
+
+.viewBtn {
+  margin-top: 10px;
+  color: #299bbf;
+  cursor: pointer;
+  font-weight: bold;
+}
+</style>
+
+<script src="../js/dashboard.js" defer></script>
+</head>
+
+<body>
+
+<!-- ✅ FINAL NAVBAR (ONLY ONE) -->
+<header class="navbar">
+  <div class="logo">LearnHub</div>
+
+  <nav class="nav-links">
+    <a href="index.html" id="navHome">Home</a>
+    <a href="dashboard.html" id="navDashboard">Dashboard</a>
+
+    <!-- PROFILE DROPDOWN -->
+    <div class="profile-menu" id="profileMenu" style="display:none;">
+      <img id="profileAvatar" class="avatar">
+      <span id="profileName">Account</span>
+      <div class="dropdown">
+        <a href="profile.html">Profile</a>
+        <a href="#" id="logoutBtn">Logout</a>
+      </div>
+    </div>
+
+    <!-- LOGIN BUTTON (hidden when logged in) -->
+    <a href="login.html" id="loginBtn">Login</a>
+  </nav>
+</header>
+
+<!-- ======================== MAIN CONTENT ======================== -->
+<main class="container fade-in">
+
+  <h2>Dashboard</h2>
+
+  <!-- Welcome Message -->
+  <section id="userWelcome">
+    <div id="welcomeBox">Loading...</div>
+  </section>
+
+  <hr>
+
+  <!-- Admin Panel -->
+  <section id="adminPanel" style="display:none;">
+    <h3>Admin Panel</h3>
+    <button onclick="location.href='manage_courses.html'" class="button">Manage Courses</button>
+    <button onclick="location.href='manage_announcements.html'" class="button">Manage Announcements</button>
+    <button onclick="location.href='manage_quizzes.html'" class="button">Manage Quizzes</button>
+  </section>
+
+  <!-- My Courses -->
+  <section id="myCoursesSection">
+    <h3>My Courses</h3>
+    <ul id="myCoursesList"></ul>
+  </section>
+
+</main>
+
+<!-- ========== NAVBAR USER LOGIC ========== -->
+<script>
+(function() {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const loginBtn = document.getElementById("loginBtn");
+  const navDashboard = document.getElementById("navDashboard");
+  const profileMenu = document.getElementById("profileMenu");
+  const profileName = document.getElementById("profileName");
+  const profileAvatar = document.getElementById("profileAvatar");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  if (user) {
+    loginBtn.style.display = "none";
+    navDashboard.style.display = "inline-block";
+    profileMenu.style.display = "flex";
+
+    // Show name + avatar
+    profileName.textContent = user.name;
+    profileAvatar.src = user.avatar || "https://i.ibb.co/vJvbJrV/default-avatar.png";
+  } else {
+    loginBtn.style.display = "inline-block";
+    navDashboard.style.display = "none";
+    profileMenu.style.display = "none";
+  }
+
+  if (logoutBtn) {
+    logoutBtn.onclick = () => {
+      localStorage.clear();
+      alert("Logged out successfully!");
+      location.href = "login.html";
+    };
+  }
+})();
+</script>
+
+</body>
+</html>
